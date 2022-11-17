@@ -1,0 +1,12 @@
+sudo apt-get install libcap-dev  -- for ubunntu
+sudo apt install libseccomp-dev libseccomp2 seccomp  -- for ubuntu
+gcc -Wl,--no-as-needed -Wall -Werror -lcap -lseccomp contained.c -o contained
+// sudo ./contained -u -1 -m . -c /bin/sh ~
+sudo ./contained -u 1022 -m / -c /bin/sh
+pwd
+id
+hostname
+exit
+
+// 通过指定 -Wl,--as-needed 选项，链接过程中，链接器会检查所有的依赖库，没有实际被引用的库，不再写入可执行文件头。最终生成的可执行文件头中包含的都是必要的链接库信息。
+// -Wl,--no-as-needed 选项不会做这样的检查，会把用户指定的链接库完全写入可执行文件中。
